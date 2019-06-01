@@ -99,6 +99,22 @@ namespace KeyValuePairs
             select pair.Value;
 
         /// <summary>
+        /// Pairs each element in a sequence with its key.
+        /// </summary>
+
+        public static IEnumerable<KeyValuePair<TKey, TSource>>
+            PairKey<TSource, TKey>(
+                this IEnumerable<TSource> source,
+                Func<TSource, TKey> keySelector)
+        {
+            if (source == null) throw new ArgumentNullException(nameof(source));
+            if (keySelector == null) throw new ArgumentNullException(nameof(keySelector));
+
+            return from e in source
+                   select KeyValuePair(keySelector(e), e);
+        }
+
+        /// <summary>
         /// Applies a function to each key of a sequence of key-value pairs.
         /// </summary>
 

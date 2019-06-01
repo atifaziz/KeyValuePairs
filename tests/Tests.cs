@@ -104,6 +104,51 @@ namespace KeyValuePairs.Tests
             Assert.That(values, Is.EqualTo(new[] { 123, 456, 789 }));
         }
 
+        public class PairKey
+        {
+            [Test]
+            public void NullSource()
+            {
+                var e = Assert.Throws<ArgumentNullException>(() =>
+                    Extensions.PairKey<object, object>(null!, delegate{ throw new NotImplementedException(); }));
+
+                Assert.That(e.ParamName, Is.EqualTo("source"));
+            }
+
+            [Test]
+            public void NullKeySelector()
+            {
+                var e = Assert.Throws<ArgumentNullException>(() =>
+                    new object[0].PairKey((Func<object, object>)null!));
+
+                Assert.That(e.ParamName, Is.EqualTo("keySelector"));
+            }
+
+            [Test]
+            public void Test()
+            {
+                var words = new[]
+                {
+                    "foo",
+                    "bar",
+                    "baz",
+                    "qux",
+                    "quux",
+                };
+
+                var result = words.PairKey(e => e[0]);
+
+                Assert.That(result, Is.EqualTo(new[]
+                {
+                    KeyValuePair('f', "foo" ),
+                    KeyValuePair('b', "bar" ),
+                    KeyValuePair('b', "baz" ),
+                    KeyValuePair('q', "qux" ),
+                    KeyValuePair('q', "quux"),
+                }));
+            }
+        }
+
         public class MapKey
         {
             [Test]

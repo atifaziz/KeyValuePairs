@@ -38,6 +38,11 @@ Console.WriteLine(pair.Swap());                 // [42, foo]
 Console.WriteLine(pair.WithValue("bar")
                       .Fold(string.Concat));    // foobar
 
+// pair each element with its key
+var words = new[] { "foo", "bar", "baz", "qux", "quux" };
+Console.WriteLine(string.Join(",", words.PairKey(w => w[0])));
+// [f, foo],[b, bar],[b, baz],[q, qux],[q, quux]
+
 var pairs = new[]
 {
     KeyValuePair("foo", 123),
