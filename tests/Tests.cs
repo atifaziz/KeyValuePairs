@@ -74,34 +74,58 @@ namespace KeyValuePairs.Tests
             }
         }
 
-        [Test]
-        public void Keys()
+        public class Keys
         {
-            var pairs = new[]
+            [Test]
+            public void NullPairs()
             {
-                KeyValuePair("foo", 123),
-                KeyValuePair("bar", 456),
-                KeyValuePair("baz", 789),
-            };
+                var e = Assert.Throws<ArgumentNullException>(() =>
+                    Extensions.Keys<object, object>(null!));
 
-            var keys = pairs.Keys();
+                Assert.That(e.ParamName, Is.EqualTo("pairs"));
+            }
 
-            Assert.That(keys, Is.EqualTo(new[] { "foo", "bar", "baz" }));
+            [Test]
+            public void Test()
+            {
+                var pairs = new[]
+                {
+                    KeyValuePair("foo", 123),
+                    KeyValuePair("bar", 456),
+                    KeyValuePair("baz", 789),
+                };
+
+                var keys = pairs.Keys();
+
+                Assert.That(keys, Is.EqualTo(new[] { "foo", "bar", "baz" }));
+            }
         }
 
-        [Test]
-        public void Values()
+        public class Values
         {
-            var pairs = new[]
+            [Test]
+            public void NullPairs()
             {
-                KeyValuePair("foo", 123),
-                KeyValuePair("bar", 456),
-                KeyValuePair("baz", 789),
-            };
+                var e = Assert.Throws<ArgumentNullException>(() =>
+                    Extensions.Values<object, object>(null!));
 
-            var values = pairs.Values();
+                Assert.That(e.ParamName, Is.EqualTo("pairs"));
+            }
 
-            Assert.That(values, Is.EqualTo(new[] { 123, 456, 789 }));
+            [Test]
+            public void Test()
+            {
+                var pairs = new[]
+                {
+                    KeyValuePair("foo", 123),
+                    KeyValuePair("bar", 456),
+                    KeyValuePair("baz", 789),
+                };
+
+                var values = pairs.Values();
+
+                Assert.That(values, Is.EqualTo(new[] { 123, 456, 789 }));
+            }
         }
 
         public class PairKey
