@@ -25,6 +25,7 @@ namespace KeyValuePairs.Tests
     using System;
     using System.Collections;
     using System.Collections.Generic;
+    using System.Linq;
     using KeyValuePairs;
     using NUnit.Framework;
     using static Module;
@@ -99,6 +100,22 @@ namespace KeyValuePairs.Tests
 
                 Assert.That(keys, Is.EqualTo(new[] { "foo", "bar", "baz" }));
             }
+
+            [Test]
+            public void WithDictionaryReturnsKeyCollection()
+            {
+                var pairs = new[]
+                {
+                    KeyValuePair("foo", 123),
+                    KeyValuePair("bar", 456),
+                    KeyValuePair("baz", 789),
+                };
+
+                var dict = pairs.ToDictionary(e => e.Key, e => e.Value);
+                var keys = dict.Keys();
+
+                Assert.That(keys, Is.SameAs(dict.Keys));
+            }
         }
 
         public class Values
@@ -125,6 +142,22 @@ namespace KeyValuePairs.Tests
                 var values = pairs.Values();
 
                 Assert.That(values, Is.EqualTo(new[] { 123, 456, 789 }));
+            }
+
+            [Test]
+            public void WithDictionaryReturnsValueCollection()
+            {
+                var pairs = new[]
+                {
+                    KeyValuePair("foo", 123),
+                    KeyValuePair("bar", 456),
+                    KeyValuePair("baz", 789),
+                };
+
+                var dict = pairs.ToDictionary(e => e.Key, e => e.Value);
+                var values = dict.Values();
+
+                Assert.That(values, Is.SameAs(dict.Values));
             }
         }
 

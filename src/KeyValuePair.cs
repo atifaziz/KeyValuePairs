@@ -86,8 +86,12 @@ namespace KeyValuePairs
 
         public static IEnumerable<TKey>
             Keys<TKey, TValue>(this IEnumerable<KeyValuePair<TKey, TValue>> pairs) =>
-            from pair in pairs ?? throw new ArgumentNullException(nameof(pairs))
-            select pair.Key;
+            pairs switch
+            {
+                null => throw new ArgumentNullException(nameof(pairs)),
+                IDictionary<TKey, TValue> dict => dict.Keys,
+                var enumerable => from pair in enumerable select pair.Key
+            };
 
         /// <summary>
         /// Extracts the values in a sequence of key-value pairs.
@@ -95,8 +99,12 @@ namespace KeyValuePairs
 
         public static IEnumerable<TValue>
             Values<TKey, TValue>(this IEnumerable<KeyValuePair<TKey, TValue>> pairs) =>
-            from pair in pairs ?? throw new ArgumentNullException(nameof(pairs))
-            select pair.Value;
+            pairs switch
+            {
+                null => throw new ArgumentNullException(nameof(pairs)),
+                IDictionary<TKey, TValue> dict => dict.Values,
+                var enumerable => from pair in enumerable select pair.Value
+            };
 
         /// <summary>
         /// Pairs each element in a sequence with its key.
