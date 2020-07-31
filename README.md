@@ -26,7 +26,7 @@ Following extension methods are available when you import the
 
 ```c#
 // change the key of a pair
-Console.WriteLine(pair.WithKey("bar"));         // [foo, 42]
+Console.WriteLine(pair.WithKey("bar"));         // [bar, 42]
 
 // change the value of a pair
 Console.WriteLine(pair.WithValue("baz"));       // [foo, baz]
