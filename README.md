@@ -6,7 +6,7 @@ exclusively deal with [`KeyValuePair<,>`][kvp].
 It is [available as a package for installation from nuget.org][nupkg].
 
 
-## Usgae
+## Usage
 
 Statically import `KeyValuePairs.Module`:
 
