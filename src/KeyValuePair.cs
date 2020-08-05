@@ -34,7 +34,7 @@ namespace KeyValuePairs
     public static class Module
     {
         /// <summary>
-        /// KeyValuePairs and initializes a <see cref="KeyValuePair{TKey,TValue}"/>.
+        /// Creates and initializes a <see cref="KeyValuePair{TKey,TValue}"/>.
         /// </summary>
 
         public static KeyValuePair<TKey, TValue> KeyValuePair<TKey, TValue>(TKey key, TValue value) =>
