@@ -6,6 +6,12 @@ skip_commits:
   files:
     - '*.md'
     - '*.txt'
+branches:
+  only:
+    - master
+  except:
+    - /.+[\-.]wip$/
+    - wip
 skip_tags: true
 install:
 - sh: curl -O https://dot.net/v1/dotnet-install.sh
