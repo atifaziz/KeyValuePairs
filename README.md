@@ -64,6 +64,10 @@ Console.WriteLine(string.Join(",", pairs.MapKey(k => k.ToUpperInvariant())));
 Console.WriteLine(string.Join(",", pairs.MapValue(v => v / 10m)));
 // [FOO, 12.3],[BAR, 45.6],[BAZ, 78.9]
 
+// swap keys with values
+Console.WriteLine(string.Join(",", pairs.Swap()));
+// [123, FOO],[456, BAR],[789, BAZ]
+
 // collect pairs into any collection
 var list = pairs.CollectingInto(new List<KeyValuePair<string, int>>());
 var dict = pairs.CollectingInto(new Dictionary<string, int>>());

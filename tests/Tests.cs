@@ -288,6 +288,38 @@ namespace KeyValuePairs.Tests
             }
         }
 
+        public class SwapPairs
+        {
+            [Test]
+            public void NullPairs()
+            {
+                var e = Assert.Throws<ArgumentNullException>(() =>
+                    Extensions.Swap<object, object>(null!));
+
+                Assert.That(e.ParamName, Is.EqualTo("pairs"));
+            }
+
+            [Test]
+            public void Test()
+            {
+                var pairs = new[]
+                {
+                    KeyValuePair("foo", 123),
+                    KeyValuePair("bar", 456),
+                    KeyValuePair("baz", 789),
+                };
+
+                var result = pairs.Swap();
+
+                Assert.That(result, Is.EqualTo(new[]
+                {
+                    KeyValuePair(123, "foo"),
+                    KeyValuePair(456, "bar"),
+                    KeyValuePair(789, "baz"),
+                }));
+            }
+        }
+
         public class CollectingInto
         {
             [Test]

@@ -155,6 +155,17 @@ namespace KeyValuePairs
         }
 
         /// <summary>
+        /// Swaps the key and value of all key-value pairs in the sequence
+        /// such that the values become the keys and the keys become the
+        /// values in resulting sequence of pairs.
+        /// </summary>
+
+        public static IEnumerable<KeyValuePair<TValue, TKey>>
+            Swap<TKey, TValue>(this IEnumerable<KeyValuePair<TKey, TValue>> pairs)
+            => pairs is null ? throw new ArgumentNullException(nameof(pairs))
+             : from e in pairs select e.Swap();
+
+        /// <summary>
         /// Adds a sequence of key-value pairs to a given collection and
         /// returns that collection.
         /// </summary>
